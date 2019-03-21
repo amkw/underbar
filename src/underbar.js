@@ -7,6 +7,7 @@
   // seem very useful, but remember it--if a function needs to provide an
   // iterator when the user does not pass one in, this will be handy.
   _.identity = function(val) {
+    return val;
   };
 
   /**
@@ -126,6 +127,20 @@
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
   };
+
+
+
+
+
+
+
+
+
+
+
+// Part 2 below
+
+
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
