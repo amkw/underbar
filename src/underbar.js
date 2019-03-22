@@ -120,21 +120,6 @@
     return newArray;
   };
 
-  // _.shuffle = function(list) {
-  //   var temp = 0; 
-  //   var newIndex = 0;
-
-  //   for (var i = 0; i < list.length; i++) {
-  //     newIndex = Math.ceil(Math.random() * i);
-  //     temp = list[i];
-  //     list[i] = list[newIndex];
-  //     list[newIndex] = temp;
-  //   }
-
-  //   return list;
-  // };
-
-
   // Return the results of applying an iterator to each element.
   _.map = function(collection, iterator) {
     // map() is a useful primitive iteration function that works a lot
@@ -188,35 +173,16 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-    //console.log("iterator:" + iterator);
     for (var i = 0; i < collection.length; i++) {
-      // console.log("iterator:" + iterator);
-      //console.log("accumulator:" + accumulator);
-      if (accumulator === undefined) {
-        accumulator = collection[i];
+      if (i === 0 && accumulator === undefined) {
+        accumulator = collection[0];
       } else {
-        if (iterator(accumulator, collection[i]) !== undefined) {
           accumulator = iterator(accumulator, collection[i]);
-        }
       }
     }
-    //console.log("accumulator final:" + accumulator);
+
     return accumulator;
   };
-
-
-
-
-
-
-
-
-
-
-
-// Part 2 below
-
-
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function(collection, target) {
@@ -332,9 +298,19 @@
   // TIP: This function's test suite will ask that you not modify the original
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
-  _.shuffle = function(array) {
-  };
+  _.shuffle = function(list) {
+      var temp = 0;
+      var newIndex = 0;
 
+      for (var i = 0; i < list.length; i++) {
+          newIndex = Math.ceil(Math.random() * i);
+          temp = list[i];
+          list[i] = list[newIndex];
+          list[newIndex] = temp;
+      }
+
+      return list;
+  };
 
   /**
    * ADVANCED
