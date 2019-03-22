@@ -304,6 +304,19 @@
       });
     });
 
+    _.shuffle = function(list) {
+      var temp = 0; 
+      var newIndex = 0;
+
+      for (var i = 0; i < list.length; i++) {
+        newIndex = Math.ceil(Math.random() * i);
+        temp = list[i];
+        list[i] = list[newIndex];
+        list[newIndex] = temp;
+      }
+      return list;
+    };
+
     describe('uniq', function() {
 
       it('should not mutate the input array', function() {
@@ -346,7 +359,8 @@
         var iterator = function(value) { return value === 1; };
         var numbers = [1, 2, 2, 3, 4, 4];
 
-        expect(_.uniq(FILL_ME_IN)).to.eql([1, 2]);
+        expect(_.uniq(numbers, iterator)).to.eql([1, 2, 3, 4]);
+        // expect(_.uniq(FILL_ME_IN)).to.eql([1, 2]);
       });
 
       it('should produce a brand new array instead of modifying the input array', function() {
@@ -359,7 +373,6 @@
       it('should maintain same array length', function() {
         var numbers = [1, 1, 2, 3];
         var shuffled = _.shuffle(numbers);
-
         expect(shuffled.length).to.equal(numbers.length);
       });
     });
