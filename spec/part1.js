@@ -304,19 +304,6 @@
       });
     });
 
-    _.shuffle = function(list) {
-      var temp = 0; 
-      var newIndex = 0;
-
-      for (var i = 0; i < list.length; i++) {
-        newIndex = Math.ceil(Math.random() * i);
-        temp = list[i];
-        list[i] = list[newIndex];
-        list[newIndex] = temp;
-      }
-      return list;
-    };
-
     describe('uniq', function() {
 
       it('should not mutate the input array', function() {
@@ -503,7 +490,7 @@
          *
          * You can avoid an entire class of bugs by writing functions
          * that don't mutate their inputs!
-         */
+         */ 
 
         expect(input).to.eql([1,2,3,4,5])
       });
@@ -529,7 +516,7 @@
         }, 10);
 
         expect(orderTraversed).to.eql([1,2,3,4]);
-      });
+      }); 
 
       it('should continue to call iterator even if the iterator returns undefined', function() {
         var callCount = 0;
