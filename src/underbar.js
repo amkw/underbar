@@ -105,18 +105,34 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
-    console.log("array:" + array);
 
     var newArray = [];
 
     for (var i = 0; i < array.length; i++) {
-      if (_.indexOf(array, array[i]) >= i) {
-        newArray.push(array[i]);
+      if (iterator === undefined) {
+        if (_.indexOf(array, array[i]) >= i) {
+          newArray.push(array[i]);
+        }
+      } else {
+          newArray.push(iterator(array[i], i, array));
       }
     }
-    console.log("newArray:" + newArray);
     return newArray;
   };
+
+  // _.shuffle = function(list) {
+  //   var temp = 0; 
+  //   var newIndex = 0;
+
+  //   for (var i = 0; i < list.length; i++) {
+  //     newIndex = Math.ceil(Math.random() * i);
+  //     temp = list[i];
+  //     list[i] = list[newIndex];
+  //     list[newIndex] = temp;
+  //   }
+
+  //   return list;
+  // };
 
 
   // Return the results of applying an iterator to each element.
@@ -124,12 +140,13 @@
     // map() is a useful primitive iteration function that works a lot
     // like each(), but in addition to running the operation on all
     // the members, it also maintains an array of results.
-    var newArray = [];
-    for (var i = 0; i < collection.length; i++) {
-      var item = collection[i];
-      newArray.push(iterator(item, i, collection));
-    }
-    return newArray;
+    var resultsArray = [];
+
+    _.each(collection, function(value, key) {
+      resultsArray[resultsArray.length] = iterator(value, key, collection);
+    });
+
+    return resultsArray;
   };
 
   /*
@@ -171,6 +188,20 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
+    //console.log("iterator:" + iterator);
+    for (var i = 0; i < collection.length; i++) {
+      // console.log("iterator:" + iterator);
+      //console.log("accumulator:" + accumulator);
+      if (accumulator === undefined) {
+        accumulator = collection[i];
+      } else {
+        if (iterator(accumulator, collection[i]) !== undefined) {
+          accumulator = iterator(accumulator, collection[i]);
+        }
+      }
+    }
+    //console.log("accumulator final:" + accumulator);
+    return accumulator;
   };
 
 
