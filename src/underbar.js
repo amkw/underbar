@@ -324,15 +324,15 @@
   _.shuffle = function(list) {
       var temp = 0;
       var newIndex = 0;
+      var newList = list.slice();
 
       for (var i = 0; i < list.length; i++) {
           newIndex = Math.ceil(Math.random() * i);
-          temp = list[i];
-          list[i] = list[newIndex];
-          list[newIndex] = temp;
+          temp = newList[i];
+          newList[i] = newList[newIndex];
+          newList[newIndex] = temp;
       }
-
-      return list;
+      return newList;
   };
 
   /**
