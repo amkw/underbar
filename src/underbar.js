@@ -211,10 +211,17 @@
     }, true);
   };
 
+
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    if (iterator === undefined) {
+      iterator = _.identity;
+    }
+    return _.reduce(collection, function(accumulator, item) {
+      return !!iterator(item) || accumulator;
+    }, false);
   };
 
 
