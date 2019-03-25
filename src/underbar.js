@@ -244,6 +244,8 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    // myFunction.apply(null, myParameters)
+
   };
 
   // Like extend, but doesn't ever overwrite a key that already
@@ -301,6 +303,11 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    if (Object.values(arguments).length >= 3) {
+      var myParameters = Object.values(arguments).slice(2);
+      var func = func.apply(null, myParameters);
+    }
+    window.setInterval(func, wait);
   };
 
 
