@@ -306,6 +306,18 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    // Variable in closure scope
+    var results = {};
+
+    return function () {
+      var argsString = JSON.stringify(arguments);
+      if (results[argsString] !== undefined) {
+        return results[argsString];
+      } else {
+        results[argsString] = func.apply(this, arguments);
+        return results[argsString];
+      }
+    };
   };
 
   // Delays a function for the given number of milliseconds, and then calls
