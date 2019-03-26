@@ -462,6 +462,17 @@
         memoSpy(1,2,3);
         expect(spy).to.have.been.calledTwice;
       });
+
+      it('should run the memoized function twice when arguments are reversed in order', function() {
+        // Be careful how you are checking if a set of arguments has been passed in already
+        var spy = sinon.spy(function() { return 'Dummy output'; });
+        var memoSpy = _.memoize(spy);
+
+        memoSpy(1, 2);
+        expect(spy).to.have.been.calledOnce;
+        memoSpy(2, 1);
+        expect(spy).to.have.been.calledTwice;
+      });
     });
 
     describe('delay', function() {
